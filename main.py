@@ -3,7 +3,10 @@
 
 def calc(credit, years, procent):
 
-
+    if not all(isinstance(x, (float, int)) for x in [credit, years, procent]):
+        raise ValueError("Некорректный тип данных")
+    if min(credit, years, procent) <= 0:
+        raise ValueError("Некорректный размер данных")
 
     monthly_rate = procent/12/100
     total_rate = (1 + monthly_rate)**(years * 12)
