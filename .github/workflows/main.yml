@@ -19,7 +19,6 @@ jobs:
       - name: Run unittests
         run: |
           python -m unittest tests
-
         continue-on-error: false
 
   
