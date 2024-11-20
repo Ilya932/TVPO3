@@ -1,0 +1,33 @@
+name: Test Main.py on Push
+
+on: [push]
+
+jobs:
+  test_main_py:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run unittests
+        run: python -m unittest discover -p "*.py"
+
+      # Сохраняем изменения только если все тесты прошли успешно
+      - name: Commit changes if all tests passed
+        if: success()
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Automated commit after successful tests"
+          git push origin HEAD:${{ github.ref }}
