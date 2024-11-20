@@ -13,7 +13,8 @@ def calc(credit, years, procent):
     monthly_payment = credit * monthly_rate * total_rate / (total_rate - 1)
     overpayment = monthly_payment * years * 12 - credit
     result = ["ежемесячный платёж", round(monthly_payment),"переплата",round(overpayment)]
-    return result
+
+    return result #результат
 
 
 
