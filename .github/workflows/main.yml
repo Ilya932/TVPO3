@@ -1,9 +1,10 @@
-name: Test Main.py on Push
+name: Test and Deploy Main.py on Push
 
 on: [push]
 
 jobs:
   test_main_py:
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -15,19 +16,27 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
       - name: Run unittests
-        run: python -m unittest discover -p "*.py"
-
-      # Сохраняем изменения только если все тесты прошли успешно
-      - name: Commit changes if all tests passed
-        if: success()
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Automated commit after successful tests"
-          git push origin HEAD:${{ github.ref }}
+          python -m unittest discover -s tests -p "*.py"
+
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    if: success() && github.ref == 'refs/heads/main'  # Деплой будет выполняться только для ветки main и при успешных тестах
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies for deploy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rsync  # Устанавливаем rsync для синхронизации файлов на сервер
+
+      - name: Deploy Application
+        run: |
+          echo "Deploying application..."
+          sudo mkdir -p /var/www/project  # Создаем директорию для деплоя
+          rsync -av --no-perms --no-owner --no-group --exclude '.git*' ./ /var/www/project/  # Копируем файлы на сервер
+          echo "Successfully deployed"
