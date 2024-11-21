@@ -21,4 +21,23 @@ jobs:
           python -m unittest tests
         continue-on-error: false
 
+  deploy:
+    runs-on: ubuntu-latest  
+    needs: test_main_py  
+    if: success()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy
+        run: |
+            sudo mkdir -p /var/www/project
+            cd /var/www/project
+            sudo git clone https://github.com/Ilya932/TVPO3.git
+            ls -ls
+            cd TVPO3
+            python main.py 10000000 30 20
+            echo "Successfully deployed"
+
   
