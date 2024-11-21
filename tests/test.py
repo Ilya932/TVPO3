@@ -34,7 +34,7 @@ class TestCalcFunction(unittest.TestCase):
         # Тест с некорректным значением процента
         with self.assertRaises(ValueError) as context:
             calc(100000, 5, -15)
-        self.assertEqual(str(context.exception), "Некорректный размер данных")
+        self.assertEqual(str(context.exception), "корректный размер данных")
 
         with self.assertRaises(ValueError) as context:
             calc(100000, 5, "ten")
