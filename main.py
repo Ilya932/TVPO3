@@ -12,5 +12,3 @@ def calc(credit, years, procent):
     result = ["ежемесячный платёж", round(monthly_payment),
               "переплата", round(overpayment)]
     return result
-
-
