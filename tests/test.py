@@ -3,14 +3,17 @@ from main import calc
 
 class TestCalcFunction(unittest.TestCase):
 
+
     def test_valid_input(self):
         # Тест с корректными значениями
         result = calc(credit=100000, years=5, procent=10)
-        expected_monthly_payment = 2125  # Пример ожидаемого ежемесячного платежа
-        expected_overpayment = 27482  # Пример ожидаемой переплаты
-        self.assertEqual(result, ["ежемесячный платёж", expected_monthly_payment,
-                                  "переплата", expected_overpayment])
-
+        # Пример ожидаемого ежемесячного платежа
+        expected_monthly_payment = 2125
+        # Пример ожидаемой переплаты  
+        expected_overpayment = 27482  
+        self.assertEqual(result,
+                         ["ежемесячный платёж", expected_monthly_payment,
+                        "переплата", expected_overpayment])
 
     def test_invalid_credit(self):
         # Тест с некорректным значением кредита
@@ -22,7 +25,6 @@ class TestCalcFunction(unittest.TestCase):
             calc("100000", 5, 10)
         self.assertEqual(str(context.exception), "Некорректный тип данных")
 
-
     def test_invalid_years(self):
         # Тест с некорректным значением срока кредита
         with self.assertRaises(ValueError) as context:
@@ -32,7 +34,6 @@ class TestCalcFunction(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             calc(100000, "five", 10)
         self.assertEqual(str(context.exception), "Некорректный тип данных")
-
 
     def test_invalid_procent(self):
         # Тест с некорректным значением процента
