@@ -56,7 +56,7 @@ jobs:
     needs: docker-build
     steps:
       - name: Download Docker image artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: pi3-image
           path: .
