@@ -8,10 +8,10 @@ class TestCalcFunction(unittest.TestCase):
         # Тест с корректными значениями
         result = calc(credit=100000, years=5, procent=10)
         # Пример ожидаемого ежемесячного платежа
-        expected_monthly_payment = 2125
+        expectedmonthlypayment = 2125
         # Пример ожидаемой переплаты
         expected_overpayment = 27482
-        self.assertEqual(result, ["ежемесячный платёж", expected_monthly_payment,
+        self.assertEqual(result, ["ежемесячный платёж", expectedmonthlypayment,
                                   "переплата", expected_overpayment])
 
     def test_invalid_credit(self):
