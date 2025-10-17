@@ -1,6 +1,3 @@
-
-
-
 def calc(credit, years, procent):
 
     if not all(isinstance(x, (float, int)) for x in [credit, years, procent]):
@@ -15,8 +12,3 @@ def calc(credit, years, procent):
     result = ["ежемесячный платёж", round(monthly_payment),"переплата",round(overpayment)]
 
     return result
-
-
-
-
-
