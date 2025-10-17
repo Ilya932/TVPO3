@@ -1,19 +1,21 @@
 import unittest
 from main import calc
 
-class TestCalcFunction(unittest.TestCase):
 
+class TestCalcFunction(unittest.TestCase):
 
     def test_valid_input(self):
         # Тест с корректными значениями
         result = calc(credit=100000, years=5, procent=10)
         # Пример ожидаемого ежемесячного платежа
         expected_monthly_payment = 2125
-        # Пример ожидаемой переплаты  
-        expected_overpayment = 27482  
-        self.assertEqual(result,
-                         ["ежемесячный платёж", expected_monthly_payment,
-                        "переплата", expected_overpayment])
+        # Пример ожидаемой переплаты
+        expected_overpayment = 27482
+        self.assertEqual(
+            result,
+            ["ежемесячный платёж", expected_monthly_payment,
+            "переплата", expected_overpayment]
+        )
 
     def test_invalid_credit(self):
         # Тест с некорректным значением кредита
