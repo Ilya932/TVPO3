@@ -11,13 +11,8 @@ class TestCalcFunction(unittest.TestCase):
         expected_monthly_payment = 2125
         # Пример ожидаемой переплаты
         expected_overpayment = 27482
-        self.assertEqual(
-            result,
-            [
-                "ежемесячный платёж", expected_monthly_payment,
-                "переплата", expected_overpayment
-            ]
-        )
+        self.assertEqual(result, ["ежемесячный платёж", expected_monthly_payment,
+                                  "переплата", expected_overpayment])
 
     def test_invalid_credit(self):
         # Тест с некорректным значением кредита
