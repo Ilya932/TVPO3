@@ -50,7 +50,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t pi3:latest .
       - name: Save Docker image as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pi3-image
           path: pi3.tar
