@@ -13,8 +13,10 @@ class TestCalcFunction(unittest.TestCase):
         expected_overpayment = 27482
         self.assertEqual(
             result,
-            ["ежемесячный платёж", expected_monthly_payment,
-            "переплата", expected_overpayment]
+            [
+                "ежемесячный платёж", expected_monthly_payment,
+                "переплата", expected_overpayment
+            ]
         )
 
     def test_invalid_credit(self):
