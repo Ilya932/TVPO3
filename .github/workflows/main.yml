@@ -52,25 +52,25 @@ jobs:
         run: docker build -t pi3:latest .
 
   deploy:
-  name: Deploy Application
-  runs-on: ubuntu-latest
-  needs: docker-build  
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    needs: docker-build  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Install rsync and prepare target directory
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y rsync
-        sudo mkdir -p /var/www/project
+      - name: Install rsync and prepare target directory
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rsync
+          sudo mkdir -p /var/www/project
 
-    - name: Deploy application
-      run: |
-        echo "Deploying application..."
-        pwd
-        rsync -av --no-perms --no-owner --no-group --exclude ".git*" $GITHUB_WORKSPACE/ /var/www/project
-        echo "Successfully deployed"
+      - name: Deploy application
+        run: |
+          echo "Deploying application..."
+          pwd
+          rsync -av --no-perms --no-owner --no-group --exclude ".git*" $GITHUB_WORKSPACE/ /var/www/project
+          echo "Successfully deployed"
 
