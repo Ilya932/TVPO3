@@ -21,7 +21,7 @@ jobs:
       - name: Install flake8
         run: pip install flake8
       - name: Run flake8
-        run: flake8 main.py test_main.py
+        run: flake8 main.py tests/test.py
 
   test:
     name: Run Python tests
@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run tests
-        run: python -m unittest discover -s . -p "test_main.py"
+        run: python -m unittest discover -s . -p "tests/test.py"
 
   docker-build:
     name: Build Docker image
