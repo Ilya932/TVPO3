@@ -73,4 +73,5 @@ jobs:
           body: "CI passed on develop, merging changes into main"
           commit-message: "Auto merge from develop"
           delete-branch: false
+          update-branch: false
 
