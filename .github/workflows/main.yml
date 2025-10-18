@@ -53,12 +53,15 @@ jobs:
     name: Merge develop into main
     runs-on: ubuntu-latest
     steps:
-      - name: Merge develop into main
+      - name: Create PR into main
         if: success()
-        uses: devops-infra/action-merge-branch@v0.8.0
+        uses: peter-evans/create-pull-request@v6
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: develop
-          target_branch: main
-          commit_message_template: "Auto-merge develop into main (build success)"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          base: main
+          title: "Auto-merge develop → main"
+          body: "CI passed on develop, merging changes into main"
+          commit-message: "Auto merge from develop"
+          delete-branch: false
 
