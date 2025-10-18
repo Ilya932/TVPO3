@@ -4,6 +4,10 @@ on:
   push:
     branches: [develop]   
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   lint:
     name: Lint Python code
@@ -53,12 +57,17 @@ jobs:
     name: Merge develop into main
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+  
       - name: Create PR into main
         if: success()
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: develop
           base: main
           title: "Auto-merge develop → main"
           body: "CI passed on develop, merging changes into main"
