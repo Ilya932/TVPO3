@@ -5,7 +5,7 @@ from main import calc
 class TestCalcFunction(unittest.TestCase):
 
     def test_valid_input(self):
-        # Тест с корректными значениямиааааааыапыап
+        # Тест с корректными значениямиааааааыапыапсссссссссссссссссссссссссссссссссссссссссссссссссссссссссссс
         result = calc(credit=100000, years=5, procent=10)
         # Пример ожидаемого ежемесячного платежа
         expectedmonthlypayment = 2125
