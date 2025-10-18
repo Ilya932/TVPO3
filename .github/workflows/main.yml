@@ -55,8 +55,9 @@ jobs:
         run: docker build -t pi3:latest .
 
   deploy:
-    name: Merge develop into main
+    name: Sync main with develop
     runs-on: ubuntu-latest
+    needs: docker-build  # или test, если docker не обязателен для деплоя
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -64,10 +65,19 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Merge develop into main
+      - name: Sync main to develop
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          
+          # Получаем последний коммит из develop
+          git checkout develop
+          DEVELOP_COMMIT=$(git rev-parse HEAD)
+          
+          # Переключаемся на main и перезаписываем его
           git checkout main
-          git merge develop --no-ff -m "Auto-merge from develop"
-          git push origin main
+          git reset --hard $DEVELOP_COMMIT
+          
+          # Пушим с force (без --force, но через push --force-with-lease для безопасности)
+          git push origin main --force-with-lease
+
