@@ -50,6 +50,8 @@ jobs:
         run: docker build -t pi3:latest .
 
   deploy:
+    name: Merge develop into main
+    runs-on: ubuntu-latest
     steps:
       - name: Merge develop into main
         if: success()
