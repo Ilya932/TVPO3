@@ -50,12 +50,12 @@ jobs:
         run: docker build -t pi3:latest .
 
   deploy:
-    - name: Merge develop into main
-      if: success()
-      uses: devops-infra/action-merge-branch@v0.8.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        source_branch: develop
-        target_branch: main
-        commit_message_template: "Auto-merge develop into main (build success)"
+    name: Merge develop into main
+    if: success()
+    uses: devops-infra/action-merge-branch@v0.8.0
+    with:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+      source_branch: develop
+      target_branch: main
+      commit_message_template: "Auto-merge develop into main (build success)"
 
